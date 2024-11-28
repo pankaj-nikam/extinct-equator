@@ -1,0 +1,66 @@
+---
+import VerticalMenu from "../components/VerticalMenu.astro";
+import "../styles/global.css";
+
+const menuOptions = [
+  {
+    label: "Home",
+    url: "",
+  },
+  {
+    label: "Content Collections",
+    url: "collections",
+  },
+  {
+    label: "Endpoints",
+    url: "endpoints",
+  },
+  {
+    label: "Form Submissions",
+    url: "forms",
+  },
+  {
+    label: "HTML Streaming",
+    url: "streaming",
+  },
+];
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Astro</title>
+  </head>
+  <body>
+    <div class="container">
+      <nav class="navigation">
+        <VerticalMenu options={menuOptions} activeOptionUrl="endpoints" />
+      </nav>
+      <main>
+        <slot />
+      </main>
+    </div>
+  </body>
+</html>
+
+<style>
+  .container {
+    display: flex;
+    flex-direction: row;
+    padding: 2rem;
+    min-height: 100%;
+  }
+
+  .navigation {
+    flex: 0.25 0.25 0;
+  }
+
+  main {
+    flex: 0.75 0.75 0;
+    border: 2px solid #800;
+    padding: 1rem;
+  }
+</style>
