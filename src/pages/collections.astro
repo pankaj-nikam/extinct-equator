@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Image from "astro/components/Image.astro";
 
 const books = await getCollection("books");
 const articles = await getCollection("articles");
@@ -28,12 +29,15 @@ const articles = await getCollection("articles");
       <h2>Articles (type: 'content')</h2>
       {
         articles.map(({ data }) => (
-          <article style={{ marginBottom: "2rem" }}>
-            <>
+          <article class="article" style={{ marginBottom: "2rem" }}>
+            <div class="thumbnail">
+              <Image src={data.thumbnail} alt="" />
+            </div>
+            <div class="data">
               <h3>{data.title}</h3>
               <em>{data.pubDate.toDateString()}</em>
               <p>{data.description}</p>
-            </>
+            </div>
           </article>
         ))
       }
@@ -48,5 +52,27 @@ const articles = await getCollection("articles");
 
   .column {
     flex: 1 1 0;
+  }
+
+  .article {
+    display: flex;
+  }
+
+  .thumbnail {
+    flex: 2 2 0;
+    margin-right: 1rem;
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+
+  .data {
+    flex: 8 8 0;
+
+    h3 {
+      margin-top: 0;
+    }
   }
 </style>
