@@ -1,7 +1,52 @@
 ---
+import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+const books = await getCollection("books");
+const articles = await getCollection("articles");
 ---
 
 <BaseLayout>
   <h1>Collections</h1>
+  <!-- <Debug {books} /> -->
+  <div class="container">
+    <div class="column">
+      <h2>Books (type: 'data')</h2>
+      {
+        books.map(({ data }) => (
+          <article style={{ marginBottom: "2rem" }}>
+            <>
+              <h3>{data.title}</h3>
+              <p>{data.description}</p>
+              <p>Pages: {data.pages}</p>
+            </>
+          </article>
+        ))
+      }
+    </div>
+    <div class="column">
+      <h2>Articles (type: 'content')</h2>
+      {
+        articles.map(({ data }) => (
+          <article style={{ marginBottom: "2rem" }}>
+            <>
+              <h3>{data.title}</h3>
+              <em>{data.pubDate.toDateString()}</em>
+              <p>{data.description}</p>
+            </>
+          </article>
+        ))
+      }
+    </div>
+  </div>
 </BaseLayout>
+
+<style>
+  .container {
+    display: flex;
+  }
+
+  .column {
+    flex: 1 1 0;
+  }
+</style>
