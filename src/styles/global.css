@@ -1,3 +1,8 @@
+:root {
+  --brand-primary: #800;
+  --brand-secondary: #faebd7;
+}
+
 *,
 ::before,
 ::after {
@@ -19,6 +24,6 @@ ul {
 
 body {
   font-family: "Courier New", Courier, monospace;
-  background-color: #faebd7;
+  background-color: var(--brand-secondary);
   line-height: 1.5;
 }
