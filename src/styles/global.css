@@ -23,7 +23,7 @@ ul {
 }
 
 body {
-  font-family: "Courier New", Courier, monospace;
+  font-family: monospace;
   background-color: var(--brand-secondary);
   line-height: 1.5;
 }
