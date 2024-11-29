@@ -1,0 +1,19 @@
+---
+import type { GetStaticPaths } from "astro";
+import { getCollection } from "astro:content";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import BookEntry from "../../../components/BookEntry.astro";
+export const getStaticPaths = (async () => {
+  const books = await getCollection("books");
+  return books.map((entry) => ({
+    params: { id: entry.id },
+    props: { entry },
+  }));
+}) satisfies GetStaticPaths;
+
+const { entry } = Astro.props;
+---
+
+<BaseLayout>
+  <BookEntry entry={entry} />
+</BaseLayout>
