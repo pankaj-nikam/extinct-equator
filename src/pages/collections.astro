@@ -3,10 +3,14 @@ import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Image from "astro/components/Image.astro";
 import BookEntry from "../components/BookEntry.astro";
-import { date } from "astro:schema";
 
 const books = await getCollection("books");
 const articles = await getCollection("articles");
+
+const filteredBooks = await getCollection(
+  "books",
+  ({ data }) => data.pages > 400
+);
 ---
 
 <BaseLayout>
@@ -16,6 +20,8 @@ const articles = await getCollection("articles");
     <div class="column">
       <h2>Books (type: 'data')</h2>
       {books.map((data) => <BookEntry entry={data} />)}
+      <h2>Filtered Books (type: 'data', pages &gt; 400)</h2>
+      {filteredBooks.map((data) => <BookEntry entry={data} />)}
     </div>
     <div class="column">
       <h2>Articles (type: 'content')</h2>
