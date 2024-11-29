@@ -16,5 +16,13 @@ const { Content } = await entry.render();
 
 <BaseLayout>
   <h3>{entry.data.title}</h3>
-  <Content />
+  <div class="content">
+    <Content />
+  </div>
 </BaseLayout>
+
+<style is:global>
+  .content > p {
+    margin: 1rem 0;
+  }
+</style>

@@ -1,5 +1,6 @@
 {
     "cSpell.enabledFileTypes": {
-        "markdown": false
+        "markdown": false,
+        "mdx": false
     }
 }
