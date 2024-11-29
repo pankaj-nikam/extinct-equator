@@ -1,8 +1,8 @@
 ---
-title: Learning Javascript
-description: An introduction to Javascript for Beginners.
-pubDate: 2024-03-02
-thumbnail: ../../images/thumbnails/pexels-designecologist-1239385.jpg
+title: Go Programming
+description: An introduction to Go Programming for Beginners.
+pubDate: 2024-11-29
+thumbnail: ../../images/thumbnails/pexels-philippe-donn-1114690.jpg
 ---
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla dignissim ligula sit amet lacinia imperdiet. In leo tortor, luctus faucibus justo non, pulvinar lobortis justo. Curabitur bibendum, est at sodales commodo, orci urna laoreet arcu, a euismod nunc erat at dolor. Duis in porta diam. Quisque id elementum tortor. Aliquam volutpat placerat elit. Sed tempor egestas nibh convallis blandit. Donec augue magna, dignissim eget mi non, pellentesque fringilla massa. Cras risus nibh, consequat at tellus quis, iaculis finibus massa. Pellentesque ac consequat ligula. Nunc sodales lectus ut mauris hendrerit volutpat. Donec sit amet justo est.
