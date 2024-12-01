@@ -20,7 +20,7 @@ const [
   { dataError: productByIdError, data: productById },
 ] = await Promise.all([
   fetcher<Product>(`${Astro.url.origin}/api/products`),
-  fetcher<Product>(`${Astro.url.origin}/api/products/30`),
+  fetcher<Product>(`${Astro.url.origin}/api/products/3`),
 ]);
 ---
 

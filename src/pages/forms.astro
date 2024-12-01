@@ -1,7 +1,136 @@
 ---
+export const prerender = false;
+
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+import TwoColumnLayout from "../layouts/TwoColumnLayout.astro";
+import ErrorPanel from "../components/ErrorPanel.astro";
+import type { Product } from "../models/product";
+import { getProductById } from "../data/products";
+import { E } from "../../dist/server/chunks/astro/assets-service_DJwJqmWw.mjs";
+
+let product: Product | undefined;
+let productTitle: string;
+let productPrice: string;
+
+const productIdInputName = "product-id";
+const productTitleInputName = "product-title";
+const productPriceInputName = "product-price";
+
+const productTitleInputNameMinLength = 1;
+const productTitleInputNameMaxLength = 30;
+
+let successMessage;
+
+const formErrors = {
+  [productIdInputName]: "",
+  [productPriceInputName]: "",
+  general: "",
+};
+
+if (Astro.request.method === "GET") {
+  const productId = Number(Astro.url.searchParams.get(productIdInputName));
+  if (productId) {
+    product = getProductById(productId);
+  }
+} else if (Astro.request.method === "POST") {
+  try {
+    const data = await Astro.request.formData();
+    productTitle = data.get(productTitleInputName) as string;
+    productPrice = data.get(productPriceInputName) as string;
+
+    if (
+      typeof productTitle !== "string" ||
+      productTitle.length < productTitleInputNameMinLength ||
+      productTitle.length > productTitleInputNameMaxLength
+    ) {
+      formErrors[productIdInputName] =
+        `The product title must be between ${productTitleInputNameMinLength} and ${productTitleInputNameMaxLength} characters.`;
+    }
+
+    if (Number.isNaN(Number(productPrice)) || Number(productPrice) < 1) {
+      formErrors[productPriceInputName] =
+        "Product price must be a number greater than 0.";
+    }
+
+    const hasFormErrors = Object.values(formErrors).some((e) => !!e);
+
+    if (!hasFormErrors) {
+      //Assume adding this to the backend.
+      successMessage = `${productTitle} added successfully.`;
+    } else {
+    }
+  } catch (error) {
+    formErrors.general = "Could not parse content as FormData";
+  }
+}
 ---
 
 <BaseLayout>
-  <h1>Forms</h1>
+  <h1>Form Submissions</h1>
+  <ErrorPanel messages={[...Object.values(formErrors)]} />
+  {
+    product && (
+      <div class="panel">
+        <h2>Product Id: {product.id}</h2>
+        <h2>Product Title: {product.title}</h2>
+      </div>
+    )
+  }
+  <TwoColumnLayout>
+    <div slot="left-column">
+      <h2>Form: GET</h2>
+      <form>
+        <label for={productIdInputName}
+          >Product ID
+          <input
+            type="number"
+            name={productIdInputName}
+            id={productIdInputName}
+          />
+        </label>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+    <div slot="right-column">
+      <h2>Form: POST</h2>
+      <h3>Add a Product</h3>
+      <form method="post">
+        <label for={productTitleInputName}
+          >Title
+          <input
+            type="text"
+            required
+            name={productTitleInputName}
+            placeholder="Product Name"
+            id={productTitleInputName}
+            maxlength={productTitleInputNameMaxLength}
+            minlength={productTitleInputNameMinLength}
+          />
+        </label>
+        <label for={productPriceInputName}
+          >Price
+          <input
+            type="number"
+            name={productPriceInputName}
+            id={productPriceInputName}
+          />
+        </label>
+        <button type="submit">Submit</button>
+      </form>
+      {successMessage && <div class="success-panel">{successMessage}</div>}
+    </div>
+  </TwoColumnLayout>
 </BaseLayout>
+
+<style>
+  .panel {
+    border: 2px dashed var(--brand-primary);
+    padding: 1rem;
+  }
+
+  .success-panel {
+    border: 2px dashed var(--success);
+    padding: 1rem;
+  }
+</style>

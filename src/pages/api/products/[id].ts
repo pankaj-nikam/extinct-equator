@@ -1,11 +1,11 @@
 import type { APIContext, APIRoute } from "astro";
 
 export const prerender = false;
-import products from "../../../data/products.json";
+import { getProductById } from "../../../data/products";
 
 export const GET: APIRoute = ({ params }: APIContext) => {
   const id = Number(params.id);
-  const product = products.find((p) => p.id === id);
+  const product = getProductById(id);
   if (product) {
     return new Response(JSON.stringify(product), {
       status: 200,
