@@ -5,6 +5,7 @@ import fetcher from "../data/fetcher";
 
 import { type Product } from "../models/product";
 import TwoColumnLayout from "../layouts/TwoColumnLayout.astro";
+import ErrorPanel from "../components/ErrorPanel.astro";
 
 // const { dataError: productsError, data: products } = await fetcher<Product>(
 //   `${Astro.url.origin}/api/products`
@@ -19,20 +20,13 @@ const [
   { dataError: productByIdError, data: productById },
 ] = await Promise.all([
   fetcher<Product>(`${Astro.url.origin}/api/products`),
-  fetcher<Product>(`${Astro.url.origin}/api/products/3`),
+  fetcher<Product>(`${Astro.url.origin}/api/products/30`),
 ]);
 ---
 
 <BaseLayout>
   <h1>Endpoints</h1>
-  {
-    (productsError || productByIdError) && (
-      <div class="error">
-        <p>{productsError}</p>
-        <p>{productByIdError}</p>
-      </div>
-    )
-  }
+  <ErrorPanel messages={[productsError, productByIdError]} />
   <TwoColumnLayout>
     <div slot="left-column">
       {
@@ -72,11 +66,3 @@ const [
     </div>
   </TwoColumnLayout>
 </BaseLayout>
-
-<style>
-  .error {
-    padding: 1rem;
-    color: var(--error);
-    border: 2px solid var(--error);
-  }
-</style>

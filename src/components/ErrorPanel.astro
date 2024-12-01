@@ -1,0 +1,23 @@
+---
+interface Props {
+  messages: Array<string | undefined>;
+}
+
+const { messages } = Astro.props;
+---
+
+{
+  Array.isArray(messages) && messages.some((m) => !!m) ? (
+    <div class="error-panel">
+      <p>{messages.map((message) => (message ? <p>{message}</p> : null))}</p>
+    </div>
+  ) : null
+}
+
+<style>
+  .error-panel {
+    padding: 1rem;
+    color: var(--error);
+    border: 2px solid var(--error);
+  }
+</style>
