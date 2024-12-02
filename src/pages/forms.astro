@@ -16,6 +16,7 @@ import {
   validateNewProductInput,
 } from "../data/products";
 import { E } from "../../dist/server/chunks/astro/assets-service_DJwJqmWw.mjs";
+import NewProductForm from "../components/NewProductForm";
 
 let product: Product | undefined;
 let productTitle = "";
@@ -114,23 +115,10 @@ if (Astro.request.method === "GET") {
         <button type="submit">Submit</button>
       </form>
       {successMessage && <div class="success-panel">{successMessage}</div>}
+
+      <h2 style={{ marginTop: "2rem" }}>Form: POST to API endpoint</h2>
+      <h3>Add a Product</h3>
+      <NewProductForm client:load />
     </div>
   </TwoColumnLayout>
 </BaseLayout>
-
-<style>
-  .panel {
-    border: 2px dashed var(--brand-primary);
-    padding: 1rem;
-  }
-
-  .success-panel {
-    border: 2px dashed var(--success);
-    padding: 1rem;
-    margin-top: 1rem;
-  }
-
-  .input-error {
-    border: 2px solid var(--error);
-  }
-</style>

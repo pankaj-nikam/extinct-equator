@@ -29,3 +29,24 @@ body {
   background-color: var(--brand-secondary);
   line-height: 1.5;
 }
+
+.panel {
+  border: 2px dashed var(--brand-primary);
+  padding: 1rem;
+}
+
+.success-panel {
+  border: 2px dashed var(--success);
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.input-error {
+  border: 2px solid var(--error);
+}
+
+.error-panel {
+  padding: 1rem;
+  color: var(--error);
+  border: 2px solid var(--error);
+}
