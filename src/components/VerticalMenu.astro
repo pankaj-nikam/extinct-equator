@@ -34,6 +34,20 @@ const activeMenuOptionColor = "#faf9f6";
   }
 </ul>
 
+<button style="margin-top: 2rem; padding: 1rem;"
+  >Click here to go to the Collections page..</button
+>
+
+<script>
+  import { navigate } from "astro:transitions/client";
+
+  document.addEventListener("astro:page-load", () => {
+    document
+      .querySelector("button")
+      ?.addEventListener("click", () => navigate("/collections"));
+  });
+</script>
+
 <style define:vars={{ activeMenuOptionColor, activeBackgroundColor }}>
   .menu {
     list-style-type: none;
