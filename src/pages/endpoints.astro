@@ -21,7 +21,6 @@ const [
 ] = await Promise.all([
   fetcher<Product>(`${Astro.url.origin}/api/products`),
   fetcher<Product>(`${Astro.url.origin}/api/products/3`),
-  fetcher<any>(`${Astro.url.origin}/api/slow`),
 ]);
 ---
 
