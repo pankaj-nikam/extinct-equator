@@ -21,12 +21,15 @@ const [
 ] = await Promise.all([
   fetcher<Product>(`${Astro.url.origin}/api/products`),
   fetcher<Product>(`${Astro.url.origin}/api/products/3`),
+  fetcher<any>(`${Astro.url.origin}/api/slow`),
 ]);
 ---
 
 <BaseLayout>
   <h1>Endpoints</h1>
-  <ErrorPanel messages={[productsError, productByIdError]} />
+  <ErrorPanel
+    messages={[productsError as string, productByIdError as string]}
+  />
   <TwoColumnLayout>
     <div slot="left-column">
       {
