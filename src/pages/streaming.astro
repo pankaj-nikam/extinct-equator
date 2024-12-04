@@ -1,7 +1,33 @@
 ---
+export const prerender = false;
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+import TwoColumnLayout from "../layouts/TwoColumnLayout.astro";
+import SingleProductInfo from "../features/components/SingleProductInfo.astro";
+import AllProductsInfo from "../features/components/AllProductsInfo.astro";
+import SlowComponent from "../features/components/SlowComponent.astro";
 ---
 
 <BaseLayout>
-  <h1>Streaming</h1>
+  <h1>HTML Streaming</h1>
+
+  <TwoColumnLayout>
+    <div slot="left-column">
+      <h2>API (GET /api/products)</h2>
+      <AllProductsInfo />
+      <h2>API (GET /api/products/3)</h2>
+      <SingleProductInfo id={3} />
+    </div>
+    <div slot="right-column">
+      <SlowComponent />
+      <article style={{ marginBottom: "2rem" }}>
+        <h2>Static file (GET /api/products.json)</h2>
+        <a href="/api/products.json">Products JSON file</a>
+      </article>
+      <article style={{ marginBottom: "2rem" }}>
+        <h2>Static file (GET /rss.xml)</h2>
+        <a href="/rss.xml">RSS feed for the Articles collection</a>
+      </article>
+    </div>
+  </TwoColumnLayout>
 </BaseLayout>

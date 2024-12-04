@@ -1,0 +1,28 @@
+---
+import ProductInfo from "../../components/ProductInfo.astro";
+import fetcher from "../../data/fetcher";
+import type { Product } from "../../models/product";
+
+const { dataError: productsError, data: products } = await fetcher<Product>(
+  `${Astro.url.origin}/api/products/`
+);
+---
+
+<div>
+  {
+    !productsError &&
+      Array.isArray(products) &&
+      products.map(({ title, price }) => (
+        <div style="margin-bottom: 2rem;">
+          <ProductInfo title={title} price={price} />
+        </div>
+      ))
+  }
+  {
+    productsError && (
+      <div class="error-panel">
+        <p>{productsError}</p>
+      </div>
+    )
+  }
+</div>

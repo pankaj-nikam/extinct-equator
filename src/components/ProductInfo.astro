@@ -1,0 +1,12 @@
+---
+import type { Product } from "../models/product";
+
+type Props = Omit<Product, "id">;
+
+const { title, price } = Astro.props;
+---
+
+<article style={{ marginBottom: "2rem" }}>
+  <h3>{title}</h3>
+  <p>Price: {price}</p>
+</article>
