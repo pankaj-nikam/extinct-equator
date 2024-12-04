@@ -22,20 +22,6 @@ export const POST: APIRoute = async ({ request }) => {
   const productTitle = data.get(productTitleInputName) as string;
   const productPrice = data.get(productPriceInputName) as string;
 
-  const errors = validateNewProductInput(productTitle, productPrice);
-
-  const hasErrors =
-    errors[productTitleInputName] || errors[productPriceInputName];
-
-  if (hasErrors) {
-    return new Response(JSON.stringify({ errors }), {
-      status: 400,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-  }
-
   return new Response(
     JSON.stringify({
       id: 1000, // hard-coded ID for the new product but in reality this would come from the backend database
