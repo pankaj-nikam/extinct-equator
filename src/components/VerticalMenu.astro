@@ -3,6 +3,7 @@ interface Props {
   options: Array<{
     label: string;
     url: string;
+    disableTransition?: boolean;
   }>;
   activeOptionUrl: string;
   activeBackgroundColor?: string;
@@ -19,11 +20,12 @@ const activeMenuOptionColor = "#faf9f6";
 
 <ul class="menu">
   {
-    options.map(({ label, url }) => (
+    options.map(({ label, url, disableTransition }) => (
       <li>
         <a
           class:list={["menu-item", { active: url === activeOptionUrl }]}
           href={`/${url}`}
+          {...(disableTransition && { "data-astro-reload": true })}
         >
           {label}
         </a>

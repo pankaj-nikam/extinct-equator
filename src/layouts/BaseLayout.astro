@@ -1,4 +1,5 @@
 ---
+import { ViewTransitions } from "astro:transitions";
 import VerticalMenu from "../components/VerticalMenu.astro";
 import "../styles/global.css";
 
@@ -22,6 +23,7 @@ const menuOptions = [
   {
     label: "HTML Streaming",
     url: "streaming",
+    disableTransition: true,
   },
 ];
 
@@ -35,6 +37,7 @@ const [, currentPageUrl] = Astro.url.pathname.split("/");
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>Astro</title>
+    <ViewTransitions />
   </head>
   <body>
     <div class="container">
